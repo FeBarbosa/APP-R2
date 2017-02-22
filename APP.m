@@ -25,13 +25,13 @@ function f = APP(func_str)
       # GERAÇAO DA FUNC-K
         
       if(xk(1) >= 0 && xk(2) >=0)
-        func_k = [func_str ' + ' num2str(lambda(it)) '*((x(1) -' num2str(xk(1)) ').^2 + (x(2) -' num2str(xk(2)) ').^2)'];
+        func_k = [func_str ' + ' num2str(lambda(it)) '/2 *((x(1) -' num2str(xk(1)) ').^2 + (x(2) -' num2str(xk(2)) ').^2)'];
       elseif(xk(2) >= 0)
-        func_k = [func_str ' + ' num2str(lambda(it)) '*((x(1) +' num2str(abs(xk(1))) ').^2 + (x(2) -' num2str(xk(2)) ').^2)'];
+        func_k = [func_str ' + ' num2str(lambda(it)) '/2 *((x(1) +' num2str(abs(xk(1))) ').^2 + (x(2) -' num2str(xk(2)) ').^2)'];
       elseif(xk(1) >= 0)
-        func_k = [func_str ' + ' num2str(lambda(it)) '*((x(1) -' num2str(xk(1)) ').^2 + (x(2) +' num2str(abs(xk(2))) ').^2)'];
+        func_k = [func_str ' + ' num2str(lambda(it)) '/2 *((x(1) -' num2str(xk(1)) ').^2 + (x(2) +' num2str(abs(xk(2))) ').^2)'];
       else
-        func_k = [func_str ' + ' num2str(lambda(it)) '*((x(1) +' num2str(abs(xk(1))) ').^2 + (x(2) +' num2str(abs(xk(2))) ').^2)'];
+        func_k = [func_str ' + ' num2str(lambda(it)) '/2 *((x(1) +' num2str(abs(xk(1))) ').^2 + (x(2) +' num2str(abs(xk(2))) ').^2)'];
       endif
      
 %      func_k = [func_str ' + ' num2str(lambda(it)) '*((x(1) -' num2str(xk(1)) ').^2 + (x(2) -' num2str(xk(2)) ').^2)'];
