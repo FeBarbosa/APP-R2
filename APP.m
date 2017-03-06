@@ -37,14 +37,15 @@ function f = APP(func_str)
 %      func_k = [func_str ' + ' num2str(lambda(it)) '*((x(1) -' num2str(xk(1)) ').^2 + (x(2) -' num2str(xk(2)) ').^2)'];
       
       func = eval(func_k);
+      
+      xAnt = xk;
 
       # ENCONTRAR O MÍNIMO DA FUNÇÃO GERADA
       [xk, fval] = fminunc(func, x0);
 
-      # CONDICAO DE PARADA
-      if(norm(xf - xk) <= tol)
-        break;
-      end
+      if(norm(xAnt - xk) <= tol)
+          break;
+      endif
 
     end #FOR
     
