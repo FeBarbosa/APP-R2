@@ -6,7 +6,22 @@
 
 ## OBS1: Por hora lambda sera constante (lambda = 2)
 
-function f = APP_1M(func_str, xf, lambda_str, tol)
+function f = APP_1M(test_num, func_str, xf, lambda_str, tol)
+
+    func_str = char(func_str);
+    lambda_str1 = char(lambda_str);
+    
+    if(tol == 1e-3)
+      tol_srt = "$10\^{-3}$";
+    elseif(tol == 1e-4)
+      tol_srt = "$10\^{-4}$";
+    else
+      tol_srt = "$10\^{-5}$";
+    endif
+    
+
+    func_str = ['@(x)' func_str];
+    lambda_str = ['@(k)' lambda_str1];
 
     #DEFINIÇOES INICIAIS E ENTRADAS
 
@@ -29,6 +44,7 @@ function f = APP_1M(func_str, xf, lambda_str, tol)
       for it = 1:num_tests
 
         # GERAÇAO DA FUNC-K
+        
           
         if(xk(1) >= 0 && xk(2) >=0)
           func_k = [func_str ' + ' num2str(lambda(it)) '/2 *((x(1) -' num2str(xk(1)) ').^2 + (x(2) -' num2str(xk(2)) ').^2)'];
@@ -48,8 +64,7 @@ function f = APP_1M(func_str, xf, lambda_str, tol)
 
         # ENCONTRAR O MÍNIMO DA FUNÇÃO GERADA
         [xk, fval] = fminunc(func, x0);
-        
-        
+       
 
         # CONDICAO DE PARADA
         if(norm(xAnt - xk) <= tol)
@@ -58,7 +73,7 @@ function f = APP_1M(func_str, xf, lambda_str, tol)
 
       endfor #FOR
       
-%      fprintf('(%.5f, %.5f) | %.8f\n', xk(1), xk(2), norm(xk - xf));
+%     fprintf('(%.5f, %.5f) | %.8f\n', xk(1), xk(2), norm(xk - xf));
       
       #MELHOR CASO
       if(norm(xk - xf) < norm(xk_melhor - xf))
@@ -89,7 +104,10 @@ function f = APP_1M(func_str, xf, lambda_str, tol)
 
     # mostrar resultados (mínimo aproximado, erro, quantidade de iterações e etc)
     
-    fprintf('\n%.8f | %.8f | %.8f | %s |(%.8f, %.8f) | %.8f | %.8f | %.8f', tol, it_media, tempo_medio, lambda_str, xk_media(1), xk_media(2), erro_medio, erro_melhor, erro_pior);
+    
+%    xlswrite('/home/PIBIC/resultados/') #escrever direto em um arquivo xls
+    
+    fprintf('\n%2.d & %s & %3.6f & %3.6f & %s & (%.8f, %.8f) & %.6f & %.6f & %.6f \\\\ \n \\hline', test_num,tol_srt, it_media, tempo_medio, lambda_str1, xk_media(1), xk_media(2), erro_medio, erro_melhor, erro_pior);
 %    fprintf('\n%.5f | %d | %.5f | %s |(%.5f, %.5f) | (%.5f, %.5f) | (%.5f, %.5f) \n', tol, it_media, tempo_medio, lambda_str, xk_media(1), xk_media(2), xk_melhor(1), xk_melhor(2), xk_pior(1), xk_pior(2));
     
     
