@@ -16,45 +16,45 @@ function f = testes_1M()
 
 func  = ['(x(1) - 1)^2 + (x(2) - 1)^2'; # [1, 1]
          '(x(1) - 1)^2 + x(2)^2';  # [1, 0]
-         '(x(2) - 0.01*x(1)^2)^2 + (x(1) + 10)^2']; # [-10, 1]     
+         '(x(2) - 0.01*x(1)^2)^2 + (x(1) + 10)^2']; # [-10, 1]
 
-        
+
 xf = [[1,1];
-      [1,0]; 
+      [1,0];
       [-10,1]];
 
-lambda = ['1'; 
-          '2'; 
+lambda = ['1';
+          '2';
           '1 + 1/k';
-          '1/k'; 
-          '2 - 1/k'; 
+          '1/k';
+          '2 - 1/k';
           '4 + (-1)^k'];
-          
+
    func = cellstr(func);
    lambda = cellstr(lambda);
-       
-   
+
+
 
 %   for i = 1:2 # FUNCOES ######################################################
-      
+
       fprintf('Nº | Tol | it_media | t_medio | lambda | xk_media | erro_medio | erro_melhor | erro_pior\n');
-      
+
       contador = 1;
-      
+
       fprintf("\\hline");
-      
+
       for j = 1:6 # LAMBDA ###################################################
-        
+
          APP_1M(contador, func(2, 1), [-10, 1], lambda(j, 1), 1e-3);
          APP_1M(++contador, func(2, 1), [-10, 1], lambda(j, 1), 1e-4);
          APP_1M(++contador, func(2, 1), [-10, 1], lambda(j, 1), 1e-5);
-         
+
          contador++;
-      
+
       endfor
-      
+
       fprintf("\n\n");
-      
+
 %   endfor
 
 endfunction
