@@ -13,7 +13,7 @@
 #OBS2: Verificar como chamar funcoes dentro de funcoes
 
 
-function f = testes_1M()
+function f = testes_MM()
 
 func  = ['(x(1) - 1)^2 + (x(2) - 1)^2'; # [1, 1]
          '(x(1) - 1)^2 + x(2)^2';  # [1, 0]
@@ -38,7 +38,7 @@ lambda = ['1';
 
 %   for i = 1:2 # FUNCOES ######################################################
 
-      fprintf('Nº | Tol | it_media | t_medio | lambda | xk_media | erro_medio | erro_melhor | erro_pior\n');
+      %fprintf('Nº | Tol | it_media | t_medio | lambda | xk_media | erro_medio | erro_melhor | erro_pior\n');
 
       contador = 1;
 
@@ -46,10 +46,12 @@ lambda = ['1';
       %fprintf("%s\n", char(func(2,1)));
 
       for j = 1:6 # LAMBDA ###################################################
-
-         APP_1M(contador, func(2, 1), [1, 0], lambda(j, 1), 1e-3);
-         APP_1M(++contador, func(2, 1), [1, 0], lambda(j, 1), 1e-4);
-         APP_1M(++contador, func(2, 1), [1, 0], lambda(j, 1), 1e-5);
+         
+         APP_MM(test_num, func_str, x0,xf, lambda_str, tol)
+         
+         APP_1M(contador, "(x(1) - 1)^2 * (x(1) - 6)^2 + (x(2) - 10)^2 + 10", [1, 10], lambda(j, 1), 1e-3);
+         APP_1M(++contador, func(1, 1), [1, 0], lambda(j, 1), 1e-4);
+         APP_1M(++contador, func(1, 1), [1, 0], lambda(j, 1), 1e-5);
 
          contador++;
 
